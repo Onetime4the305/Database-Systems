@@ -1,0 +1,28 @@
+{
+  "name": "database-systems",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Onetime4the305/Database-Systems.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Onetime4the305/Database-Systems/issues"
+  },
+  "homepage": "https://github.com/Onetime4the305/Database-Systems#readme",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mysql": "^2.18.1",
+    "react-router-dom": "^6.27.0"
+  }
+}
