@@ -76,7 +76,7 @@ INSERT INTO Hospital (HospitalName, Address, NumberOfEmployees) VALUES
 ('Community Clinic', '789 Oak St, Springfield', 30);
 
 
--- Insert data into patiens table
+-- Insert data into patients table
 INSERT INTO patients (FirstName, LastName, dob, ssn, Diagnosis, phone) VALUES
 ('John', 'Doe', '1985-06-15', '123-45-6789', 'Flu', '555-123-4567'),
 ('Jane', 'Smith', '1990-03-22', '987-65-4321', 'Cold', '555-987-6543'),

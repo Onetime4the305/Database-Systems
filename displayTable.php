@@ -22,9 +22,9 @@
 
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "B@ller04221974";
-$dbname = "HospitalManagement";
+$username = "jvincent15";
+$password = "jvincent15";
+$dbname = "jvincent15";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
