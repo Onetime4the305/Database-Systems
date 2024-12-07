@@ -1,6 +1,5 @@
 <!doctype html>
-
-<html>
+<html lang="en">
 
 <head lang="en">
     <meta charset="UTF-8">
@@ -23,7 +22,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get the id from the URL
+// Get the professional_id from the URL
 $professional_id = $_GET['professional_id'];
 
 // Get the updated form data
