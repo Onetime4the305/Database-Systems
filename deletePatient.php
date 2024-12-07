@@ -1,43 +1,20 @@
 <!doctype html>
-
-<html>
+<html lang="en">
 
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Deleting Patient from DB</title>
+    <title>Delete Patient</title>
 </head>
 
 <body>
     <div>
-<?php
-$servername = "localhost";
-$username = "jvincent15";
-$password = "jvincent15";
-$dbname = "jvincent15";
-
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Get the patient_id from the URL
-$patient_id = $_GET['patient_id'];
-
-// Delete the record from the patients table
-$sql = "DELETE FROM patients WHERE patient_id = '$patient_id'";
-
-if ($conn->query($sql) === TRUE) {
-    echo "Patient deleted successfully!";
-} else {
-    echo "Error deleting patient: " . $conn->error;
-}
-
-$conn->close();
-?>
-        <a href="displayTable.php"><input type="button" id="btn1" value="OK"></a>
+        <form action="deletePatientFromDB.php" method="post">
+            <h3>Delete Patient</h3>
+            <p>First Name: <input name="firstName" type="text" required></p>
+            <p>Last Name: <input name="lastName" type="text" required></p>
+            <input type="submit" id="btn1" value="Delete">
+        </form>
+        <a href="displayTable.php"><input type="button" id="btn2" value="Cancel"></a>
     </div>
 </body>
 

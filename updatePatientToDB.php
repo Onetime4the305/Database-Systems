@@ -1,6 +1,5 @@
 <!doctype html>
-
-<html>
+<html lang="en">
 
 <head lang="en">
     <meta charset="UTF-8">
@@ -34,7 +33,7 @@ $ssn = $_POST['ssn'];
 $diagnosis = $_POST['diagnosis'];
 $phone = $_POST['phone'];
 
-// Update the patient record in the patients table
+// Update the patient record in the database
 $sql = "UPDATE patients SET FirstName = '$firstName', LastName = '$lastName', dob = '$dob', ssn = '$ssn', Diagnosis = '$diagnosis', phone = '$phone' WHERE patient_id = '$patient_id'";
 
 if ($conn->query($sql) === TRUE) {

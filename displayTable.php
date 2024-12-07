@@ -115,7 +115,7 @@ $conn->close();
     <a href="updatePatient.php"><input type="button" id="btn1" value="Update Patient"></a>
     <a href="deleteMedicalProfessional.php"><input type="button" id="btn1" value="Delete Medical Professional"></a>
     <a href="deletePatient.php"><input type="button" id="btn1" value="Delete Patient"></a>
-    <a href="logout.php"><input type="button" id="btn1" value="Logout"></a>
+    <a href="login.php"><input type="button" id="btn1" value="Logout"></a>
 </div>
 
 </body>

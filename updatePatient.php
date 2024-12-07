@@ -1,6 +1,5 @@
 <!doctype html>
-
-<html>
+<html lang="en">
 
 <head lang="en">
     <meta charset="UTF-8">
@@ -9,6 +8,13 @@
 
 <body>
     <div>
+        <form action="updatePatient.php" method="post">
+            <h3>Find Patient to Update</h3>
+            <p>First Name: <input name="firstName" type="text" required></p>
+            <p>Last Name: <input name="lastName" type="text" required></p>
+            <input type="submit" value="Search">
+        </form>
+
 <?php
 $servername = "localhost";
 $username = "jvincent15";
@@ -23,41 +29,38 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get the patient_id from the URL
-$patient_id = $_GET['patient_id'];
-
-// Fetch current details of the patient
-$sql = "SELECT * FROM patients WHERE patient_id = '$patient_id'";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-} else {
-    echo "No records found.";
-}
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Get the updated form data
+    // Get the patient's first and last name from the form
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
-    $dob = $_POST['dob'];
-    $ssn = $_POST['ssn'];
-    $diagnosis = $_POST['diagnosis'];
-    $phone = $_POST['phone'];
 
-    // Update the patient table
-    $sql = "UPDATE patients SET FirstName = '$firstName', LastName = '$lastName', dob = '$dob', ssn = '$ssn', Diagnosis = '$diagnosis', phone = '$phone' WHERE patient_id = '$patient_id'";
+    // Query to check if patient exists in the database
+    $sql = "SELECT patient_id, FirstName, LastName FROM patients WHERE FirstName = '$firstName' AND LastName = '$lastName'";
+    $result = $conn->query($sql);
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Patient details updated successfully!";
+    if ($result->num_rows > 0) {
+        // Patient found
+        $row = $result->fetch_assoc();
+        echo "<h3>Patient Found: " . $row['FirstName'] . " " . $row['LastName'] . "</h3>";
+        echo "<form action='updatePatient.php?patient_id=" . $row['patient_id'] . "' method='post'>";
+        echo "<p>Do you want to update this record? <input type='submit' name='confirmUpdate' value='Yes'> <a href='displayTable.php'><input type='button' value='No'></a></p>";
+        echo "</form>";
     } else {
-        echo "Error updating record: " . $conn->error;
+        echo "<p>No patient found with that name.</p>";
     }
 }
 
-$conn->close();
-?>
-        <form action="updatePatient.php?patient_id=<?php echo $patient_id; ?>" method="post">
+if (isset($_POST['confirmUpdate'])) {
+    // Fetch patient_id from URL and display the update form
+    $patient_id = $_GET['patient_id'];
+
+    // Query to fetch the current details of the patient
+    $sql = "SELECT * FROM patients WHERE patient_id = '$patient_id'";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        ?>
+        <form action="updatePatientToDB.php?patient_id=<?php echo $row['patient_id']; ?>" method="post">
             <h3>Update Patient</h3>
             <p>First Name: <input name="firstName" type="text" value="<?php echo $row['FirstName']; ?>" required></p>
             <p>Last Name: <input name="lastName" type="text" value="<?php echo $row['LastName']; ?>" required></p>
@@ -65,9 +68,19 @@ $conn->close();
             <p>SSN: <input name="ssn" type="text" value="<?php echo $row['ssn']; ?>" required></p>
             <p>Diagnosis: <input name="diagnosis" type="text" value="<?php echo $row['Diagnosis']; ?>" required></p>
             <p>Phone: <input name="phone" type="text" value="<?php echo $row['phone']; ?>" required></p>
-            <input type="submit" id="btn3" value="Update">
-            <a href="displayTable.php"><input type="button" id="btn1" value="Cancel"></a>
+            <input type="submit" value="Update">
+            <a href="displayTable.php"><input type="button" value="Cancel"></a>
         </form>
+        <?php
+    } else {
+        echo "<p>No patient found with that ID.</p>";
+    }
+}
+
+// Close connection after all operations are complete
+$conn->close();
+?>
+
     </div>
 </body>
 
