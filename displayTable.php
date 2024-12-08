@@ -105,6 +105,23 @@ if ($result->num_rows > 0) {
     echo "0 results";
 }
 
+// Fetch Hospital information
+$sql = "SELECT HospitalID, HospitalName, Address, NumberOfEmployees FROM Hospital";
+$result = $conn->query($sql);
+echo "<h3>Hospital Information</h3>";
+if ($result->num_rows > 0) {
+    echo "<table><tr><th>Hospital Name</th><th>Address</th><th>Number of Employees</th></tr>";
+    while($row = $result->fetch_assoc()) {
+        $hospitalName = $row["HospitalName"];
+        $address = $row["Address"];
+        $numberOfEmployees = $row["NumberOfEmployees"];
+        echo "<tr><td>".$hospitalName."</td><td>".$address."</td><td>".$numberOfEmployees."</td></tr>";
+    }
+    echo "</table>";
+} else {
+    echo "0 results";
+}
+
 $conn->close();
 ?>
 
