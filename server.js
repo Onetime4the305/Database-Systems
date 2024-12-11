@@ -12,7 +12,7 @@ app.use(express.json());
 const db = mysql.createConnection({
     host: 'localhost', // Change to your database host
     user: 'root', // Your MySQL username
-    password: 'Mariam.DB24', // Your MySQL password
+    password: '', // Your MySQL password
     database: 'hospital_management', // The database name created from hospital-management.sql
     port: 3306
 });
